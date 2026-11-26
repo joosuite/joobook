@@ -1,0 +1,46 @@
+{
+  "name": "jbook",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A keyboard-driven EPUB and text reader for the terminal",
+  "type": "module",
+  "bin": {
+    "jbook": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "assets",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "tsx src/cli.tsx",
+    "build": "tsc && node -e \"require('node:fs').chmodSync('dist/cli.js', 0o755)\"",
+    "start": "node dist/cli.js",
+    "check": "tsc --noEmit",
+    "test": "tsx --test test/*.test.ts test/*.test.tsx",
+    "screenshots": "tsx scripts/capture-screenshots.tsx"
+  },
+  "dependencies": {
+    "fast-xml-parser": "^5.3.0",
+    "fflate": "^0.8.2",
+    "html-to-text": "^9.0.5",
+    "htmlparser2": "^8.0.2",
+    "ink": "^6.8.0",
+    "react": "^19.2.0",
+    "string-width": "^8.1.0",
+    "zod": "^4.1.0"
+  },
+  "devDependencies": {
+    "@napi-rs/canvas": "^1.2.1",
+    "@types/html-to-text": "^9.0.4",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.2.0",
+    "@xterm/headless": "^6.0.0",
+    "ink-testing-library": "^4.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0"
+  }
+}
