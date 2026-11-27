@@ -1,6 +1,6 @@
 {
   "name": "joobook",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A keyboard-driven EPUB and text reader for the terminal",
   "type": "module",
   "bin": {
