@@ -5,25 +5,20 @@ saves bookmarks and passage notes. It uses TypeScript, React, and Ink.
 
 ![joobook running with a demonstration library](assets/screenshots/library.png)
 
-## Run
+## Install
 
 Requires Node.js 22 or newer.
 
 ```sh
-cd joobook
-npm install
-npm run build
-npm start
+npm install -g joobook
+joobook
 ```
 
 Open a book directly:
 
 ```sh
-node dist/cli.js ~/Books/book.epub
+joobook ~/Books/book.epub
 ```
-
-For development, use `npm run dev`. To make the `joobook` command available on
-your PATH, run `npm link` after building.
 
 ## Library and reading
 
@@ -124,12 +119,24 @@ import limit and EPUB text has a 128 MiB expanded limit. Search shows up to
 1,000 matches. Clipboard copy uses `pbcopy` on macOS, `clip.exe` on Windows,
 or `wl-copy`, `xclip`, or `xsel` on Linux. Notes export works without a clipboard.
 
-## Development checks
+## Development
+
+From a local checkout:
+
+```sh
+npm install
+npm run build
+npm start
+```
+
+For development, use `npm run dev`. To make the local `joobook` command available
+on your PATH, run `npm link` after building.
+
+Run checks:
 
 ```sh
 npm run check
 npm test
-npm run build
 ```
 
 The tests cover EPUB 2/3 parsing, Unicode wrapping and search, persistence,
