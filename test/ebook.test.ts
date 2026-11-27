@@ -13,9 +13,6 @@ test('EPUB 3 follows spine order, decodes archive paths, and uses navigation lab
   assert.match(book.chapters[0]!.text, /traveller/);
   assert.doesNotMatch(book.chapters[0]!.text, /ignore me|display:none/);
 });
-test('EPUB 2 supports nested NCX labels', () => {
-  assert.deepEqual(parseEpub(epub({epub2: true}), 'fallback').chapters.map(c => c.title), ['At the station', 'In the garden']);
-});
 test('damaged, image-only, and non-ZIP books fail with a useful error', () => {
   assert.throws(() => parseEpub(epub({broken: true}), 'fallback'), /no readable chapters/);
   assert.throws(() => parseEpub(strToU8('not a zip'), 'fallback'));

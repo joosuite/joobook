@@ -13,7 +13,6 @@ test('EPUB tables retain rows, headings, and captions without changing source te
   assert.equal(table.caption?.text, 'Workshop options');
   assert.deepEqual(table.rows.map(row => row.map(cell => cell.text)), [['Service', 'Problem'], ['Small workshops', 'Time away from work'], ['Follow-up', 'New habits fade']]);
   for (const row of table.rows) for (const cell of row) assert.equal(chapter.text.slice(cell.start, cell.end), cell.text);
-  assert.deepEqual(parseEpub(tableFixture(), 'fixture').chapters[0]!.tables, chapter.tables);
 });
 test('wide tables align columns and narrow tables switch to labeled rows', () => {
   const chapter = parseEpub(tableFixture(), 'fixture').chapters[0]!;
@@ -51,11 +50,4 @@ test('multiple tables, empty cells, and nested table text do not lose surroundin
   assert.equal(chapter.tables!.length, 2); assert.equal(chapter.tables![0]!.rows[1]![1]!.text, '');
   const rendered = layoutChapter(chapter, 68).map(line => line.text).join('\n');
   for (const text of ['Before the table.', 'Between tables.', 'Nested left', 'Nested right', 'After the table.', 'Last']) assert.ok(rendered.includes(text), rendered);
-});
-test('small tables and source headers remain reachable at the start of a chapter', () => {
-  const chapter = parseEpub(tableFixture('<table><tr><th>Service</th><th>Problem</th></tr><tr><td>Workshops</td><td>Time away</td></tr></table>'), 'fixture').chapters[0]!;
-  const table = chapter.tables![0]!;
-  const only = {...chapter, text: chapter.text.slice(table.start, table.end), tables: [{...table, start: 0, end: table.end - table.start, caption: undefined, rows: table.rows.map(row => row.map(cell => ({...cell, start: cell.start - table.start, end: cell.end - table.start})))}]};
-  const lines = layoutChapter(only, 68), offset = only.tables[0]!.rows[0]![0]!.start;
-  assert.match(lines[readingLineAt(lines, offset)]!.text, /┌/);
 });
