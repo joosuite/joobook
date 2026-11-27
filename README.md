@@ -1,16 +1,16 @@
-# jbook
+# joobook
 
-Read local EPUB and TXT books in a terminal. jbook remembers your position and
+Read local EPUB and TXT books in a terminal. joobook remembers your position and
 saves bookmarks and passage notes. It uses TypeScript, React, and Ink.
 
-![jbook running with a demonstration library](assets/screenshots/library.png)
+![joobook running with a demonstration library](assets/screenshots/library.png)
 
 ## Run
 
 Requires Node.js 22 or newer.
 
 ```sh
-cd jbook
+cd joobook
 npm install
 npm run build
 npm start
@@ -22,7 +22,7 @@ Open a book directly:
 node dist/cli.js ~/Books/book.epub
 ```
 
-For development, use `npm run dev`. To make the `jbook` command available on
+For development, use `npm run dev`. To make the `joobook` command available on
 your PATH, run `npm link` after building.
 
 ## Library and reading
@@ -73,7 +73,7 @@ that existing passage positions stay valid. Import an edited book or another
 edition as a separate book.
 
 The library, preferences, bookmarks, and notes are stored in
-`$XDG_DATA_HOME/jbook/library.json`, or `~/.local/share/jbook/library.json` when
+`$XDG_DATA_HOME/joobook/library.json`, or `~/.local/share/joobook/library.json` when
 `XDG_DATA_HOME` is unset. Use `--home PATH` for a separate library. Exports are
 UTF-8 text files under that library's `exports/` folder. Back up the library
 folder together with the original book files.
@@ -84,7 +84,7 @@ at a time. A corrupted library produces an error and is left in place.
 ## Options
 
 ```text
-jbook [options] [book.epub | book.txt ...]
+joobook [options] [book.epub | book.txt ...]
 
 --home PATH       Use a different library directory
 --theme NAME      system, dark, or light; override the saved preference
@@ -98,7 +98,7 @@ jbook [options] [book.epub | book.txt ...]
 System theme inherits your terminal profile's background, foreground, and ANSI
 palette, including custom profiles such as Ocean. Selected rows invert the
 terminal's text and background colors. No environment-based light/dark guess
-is needed. Dark and Light use jbook's fixed palettes when selected explicitly.
+is needed. Dark and Light use joobook's fixed palettes when selected explicitly.
 
 ## Supported content
 
@@ -106,9 +106,7 @@ EPUB 2 and 3 books are read in spine order. Chapter counters and chapter jumps
 follow the book's EPUB 3 navigation or EPUB 2 NCX table of contents, including
 chapters linked by anchors inside a file. Front matter and nested subsections
 do not inflate the chapter count. One chapter can span several content files.
-When a book has no identified chapters, jbook labels its content as sections.
-Existing progress, bookmarks, and notes retain their original source positions.
-Counts for previously imported books refresh when those books are opened.
+When a book has no identified chapters, joobook labels its content as sections.
 TXT accepts UTF-8, or UTF-16 with a byte-order
 mark. Multiple `Chapter N` or Markdown headings divide TXT files into chapters.
 Reading positions use source character offsets and survive terminal resizing.

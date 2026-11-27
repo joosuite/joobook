@@ -19,7 +19,7 @@ const root = fileURLToPath(new URL('../', import.meta.url));
 const output = join(root, '.impeccable', 'review');
 const fonts = ['/System/Library/Fonts/Menlo.ttc', '/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf', 'C:\\Windows\\Fonts\\consola.ttf'];
 const font = fonts.find(existsSync);
-const family = font && GlobalFonts.registerFromPath(font, 'JbookMono') ? 'JbookMono' : 'monospace';
+const family = font && GlobalFonts.registerFromPath(font, 'JoobookMono') ? 'JoobookMono' : 'monospace';
 
 class Input extends PassThrough {
   isTTY = true;
@@ -81,7 +81,7 @@ function color(number: number, rgb: boolean, palette: boolean, fallback: string,
 }
 async function capture(spec: Capture) {
   const demo = await createDemo(spec.missing, spec.tables), stdout = new Output(spec.columns, spec.rows), stdin = new Input();
-  // An illustrative blue terminal profile tests inherited colors, not a jbook palette.
+  // An illustrative blue terminal profile tests inherited colors, not a joobook palette.
   const palette = spec.system ? {...palettes.dark, background: '#2453aa', text: '#ffffff'} : palettes[spec.light ? 'light' : 'dark'];
   const ansi = spec.system ? ansi16.map((value, i) => ({1: '#ffd0d0', 2: '#caf5ae', 3: '#fff2ad', 6: '#bbf0ff'}[i] || value)) : ansi16;
   const cellColor = (value: number, rgb: boolean, indexed: boolean, fallback: string) => color(value, rgb, indexed, fallback, ansi);
@@ -117,7 +117,7 @@ async function capture(spec: Capture) {
       }
     }
     if (!text.join('\n').includes('DEMO')) throw new Error('Capture lost its demo label.');
-    const origin = `Source: actual jbook React/Ink frames captured by scripts/capture-screenshots.tsx in a ${spec.columns}x${spec.rows} virtual terminal.${spec.system ? ' System theme with an illustrative custom blue terminal profile; not the user\'s actual Ocean configuration.' : ''} Original demo content from scripts/demo.ts. No user data; no generated image.`;
+    const origin = `Source: actual joobook React/Ink frames captured by scripts/capture-screenshots.tsx in a ${spec.columns}x${spec.rows} virtual terminal.${spec.system ? ' System theme with an illustrative custom blue terminal profile; not the user\'s actual Ocean configuration.' : ''} Original demo content from scripts/demo.ts. No user data; no generated image.`;
     await writeFile(join(output, spec.name + '.png'), provenance(await canvas.encode('png'), origin));
     await writeFile(join(output, spec.name + '.txt'), text.join('\n') + '\n');
     console.log(spec.name);

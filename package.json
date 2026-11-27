@@ -1,11 +1,11 @@
 {
-  "name": "jbook",
+  "name": "joobook",
   "version": "0.1.0",
   "private": true,
   "description": "A keyboard-driven EPUB and text reader for the terminal",
   "type": "module",
   "bin": {
-    "jbook": "dist/cli.js"
+    "joobook": "dist/cli.js"
   },
   "files": [
     "dist",

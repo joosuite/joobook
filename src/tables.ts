@@ -17,7 +17,7 @@ export function extractTables(html: string, text: string, plain: (html: string) 
   const document = parseDocument(html, {withStartIndices: true, withEndIndices: true, recognizeSelfClosing: true});
   const tables = DomUtils.findAll(element => element.name === 'table' && !ancestor(element, 'table'), document.children);
   if (!tables.length) return [];
-  const prefix = '__jbook_' + randomUUID(), insertions: {at: number; text: string}[] = [], ids: string[] = [];
+  const prefix = '__joobook_' + randomUUID(), insertions: {at: number; text: string}[] = [], ids: string[] = [];
   const mark = (at: number) => {const id = `${prefix}_${ids.length}`; ids.push(id); insertions.push({at, text: `<span id="${id}"></span>`}); return id;};
   const bounds = (element: Element, outside = false): [string, string] | undefined => {
     if (element.startIndex === null || element.endIndex === null) return;

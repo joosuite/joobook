@@ -57,18 +57,18 @@ export function fragmentOffsets(html: string, text: string, ids: string[], plain
     const opening = html.slice(element.startIndex).match(/^<(?:"[^"]*"|'[^']*'|[^'">])*>/);
     if (!opening) continue;
     const index = markers.size; markers.set(index, id);
-    insertions.push({at: element.startIndex + opening[0].length, marker: `\ue000JBOOK${index}\ue001`});
+    insertions.push({at: element.startIndex + opening[0].length, marker: `\ue000JOOBOOK${index}\ue001`});
   }
   let marked = html;
   for (const insertion of insertions.sort((a, b) => b.at - a.at)) marked = marked.slice(0, insertion.at) + insertion.marker + marked.slice(insertion.at);
   const converted = plain(marked);
-  const marker = /\ue000JBOOK(\d+)\ue001/g;
+  const marker = /\ue000JOOBOOK(\d+)\ue001/g;
   let source = 0, rendered = 0;
   // Only whitespace may differ in the auxiliary conversion. Fail closed for
   // unsupported formatting instead of making up a chapter position.
   if (converted.replace(marker, '').replace(/\s/g, '') !== text.replace(/\s/g, '')) return offsets;
   while (rendered < converted.length) {
-    if (converted.startsWith('\ue000JBOOK', rendered)) {
+    if (converted.startsWith('\ue000JOOBOOK', rendered)) {
       marker.lastIndex = rendered; const match = marker.exec(converted);
       if (match?.index === rendered) {
         while (/\s/.test(text[source] || '') && source < text.length) source++;

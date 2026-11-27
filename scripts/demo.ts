@@ -10,7 +10,7 @@ export async function createDemo(missing = false, tables = false) {
     const book = await f.store.import(f.path);
     for (const name of ['Station notes', 'Winter journal', 'Letters from the coast', 'The night train', 'A garden in November', 'Walking home', 'The last platform']) {
       const path = join(f.directory, name + '.txt');
-      await writeFile(path, `${name}\n\nThis is original demonstration text for jbook.\n\nThe station was quiet. A reader sat beside a lamp and opened a notebook. The last train would arrive before sunset.`);
+      await writeFile(path, `${name}\n\nThis is original demonstration text for joobook.\n\nThe station was quiet. A reader sat beside a lamp and opened a notebook. The last train would arrive before sunset.`);
       await f.store.import(path);
     }
     f.store.update(data => {

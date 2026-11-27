@@ -27,7 +27,7 @@ const HELP = [
   'BOOKMARKS AND NOTES', 'Enter           Jump to saved position', 'r               Rename bookmark', 'e               Edit note', 'd               Delete, then confirm', 'x               Export notes and bookmarks', '',
   'FILE BROWSER', '↑/↓             Move selection', 'Enter           Open directory or import selection', 'Space           Select or unselect a file', 'a               Select all visible books', 'p               Type a file or directory path', 'Backspace       Parent directory', 'Esc             Cancel remaining imports / back', '',
   'EVERYWHERE', ',               Preferences', '?               This help', '!               Read the full current error', 'Esc             Back or cancel', 'Ctrl+C          Save position and quit', '',
-  'EPUB and TXT only. Images, CSS, and DRM are not supported.', 'TXT accepts UTF-8 or UTF-16. UTF-16 needs a byte-order mark.', 'Books stay in their source folders. jbook stores positions and notes.', 'Vim shortcuts can be enabled in preferences.',
+  'EPUB and TXT only. Images, CSS, and DRM are not supported.', 'TXT accepts UTF-8 or UTF-16. UTF-16 needs a byte-order mark.', 'Books stay in their source folders. joobook stores positions and notes.', 'Vim shortcuts can be enabled in preferences.',
 ];
 
 export function App({store, initialBook, initialId, startLibrary = false, size, theme: overrideTheme}: AppProps) {
@@ -354,12 +354,12 @@ export function App({store, initialBook, initialId, startLibrary = false, size, 
 
   const grid = new Grid(w, h);
   if (w < 36 || h < 17) {
-    grid.wrap(0, 0, 'jbook needs at least 36 columns and 18 rows. Resize the terminal.', w, 'warn', h - 2); grid.text(0, h - 1, 'q quit', 'muted');
+    grid.wrap(0, 0, 'joobook needs at least 36 columns and 18 rows. Resize the terminal.', w, 'warn', h - 2); grid.text(0, h - 1, 'q quit', 'muted');
     return <Terminal grid={grid} theme={theme}/>;
   }
   const row = (y: number, text: string, style: Style = 'text') => grid.row(y, text, style);
   const statusY = h - 5, ruleY = h - 3;
-  grid.row(0, 'jbook', 'accent'); grid.text(10, 0, names[view], 'muted', w - 12);
+  grid.row(0, 'joobook', 'accent'); grid.text(12, 0, names[view], 'muted', w - 14);
   if (w >= 90) grid.text(w - 22, 0, 'LOCAL · EPUB / TXT', 'muted');
   grid.rule(1); grid.rule(ruleY);
   const footer = (text: string) => {grid.clear(0, h - 2, w, 2); return grid.wrap(2, h - 2, text, w - 4, 'muted', 2);};
@@ -385,7 +385,7 @@ export function App({store, initialBook, initialId, startLibrary = false, size, 
       row(8, store.data.books.length ? 'No books match this shelf or filter.' : 'Your library is empty.', 'accent');
       grid.wrap(2, 11, store.data.books.length ? '/ edit filter · f change shelf' : 'Add an EPUB or a text file to start reading.', w - 4);
       row(15, 'i  Import a book', 'accent');
-      if (h > 25) {row(20, 'Or open one from your shell:', 'muted'); row(22, 'jbook ~/Books/alice.epub');}
+      if (h > 25) {row(20, 'Or open one from your shell:', 'muted'); row(22, 'joobook ~/Books/alice.epub');}
     } else books.slice(start, start + visible).forEach((b, i) => {
       const y = listY + i * 2, selected = b === entry;
       const percent = `${Math.floor(b.percent)}%`, title = truncate(b.title, listWidth - 9);

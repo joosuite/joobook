@@ -5,7 +5,7 @@ import {randomUUID} from 'node:crypto';
 import {librarySchema, preferencesSchema, chapterEntries, chapterInfo, type Library, type Entry, type Ebook} from './model.js';
 import {readEbook} from './ebook.js';
 
-export function defaultHome(): string {return join(process.env.XDG_DATA_HOME || join(homedir(), '.local', 'share'), 'jbook');}
+export function defaultHome(): string {return join(process.env.XDG_DATA_HOME || join(homedir(), '.local', 'share'), 'joobook');}
 export function expandPath(path: string): string {return resolve(path === '~' ? homedir() : path.startsWith('~/') ? join(homedir(), path.slice(2)) : path);}
 export class LibraryStore {
   data: Library;
@@ -31,12 +31,12 @@ export class LibraryStore {
       if ((error as NodeJS.ErrnoException).code !== 'EEXIST') throw error;
       let owner: {pid: number; token: string};
       try {owner = JSON.parse(readFileSync(file, 'utf8')); if (!Number.isInteger(owner.pid) || owner.pid <= 0) throw new Error();}
-      catch {throw new Error(`Cannot read ${file}. Check that no jbook instance is running before removing the lock.`);}
+      catch {throw new Error(`Cannot read ${file}. Check that no joobook instance is running before removing the lock.`);}
       try {process.kill(owner.pid, 0);}
       catch (e) {
         if ((e as NodeJS.ErrnoException).code === 'ESRCH') {unlinkSync(file); this.acquire(); return;}
       }
-      throw new Error('This library is already open in another jbook instance. Close it first, or use --home for a separate library.');
+      throw new Error('This library is already open in another joobook instance. Close it first, or use --home for a separate library.');
     }
     writeFileSync(this.lock, JSON.stringify({pid: process.pid, token: this.token}));
   }

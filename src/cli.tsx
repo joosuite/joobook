@@ -6,9 +6,9 @@ import {App} from './app.js';
 import {LibraryStore} from './store.js';
 import {clean, type Ebook, type Preferences} from './model.js';
 
-const help = `jbook · read local EPUB and TXT ebooks in your terminal
+const help = `joobook · read local EPUB and TXT ebooks in your terminal
 
-Usage: jbook [options] [book.epub | book.txt ...]
+Usage: joobook [options] [book.epub | book.txt ...]
 
   --home PATH        Store the library, positions, and notes here
   --theme NAME       system, dark, or light; overrides the saved theme
@@ -19,7 +19,7 @@ Usage: jbook [options] [book.epub | book.txt ...]
   --version, -v      Show version
 
 File arguments import books. The first file opens after import unless --library
-is supplied. With no file arguments, jbook resumes your last book by default.
+is supplied. With no file arguments, joobook resumes your last book by default.
 
 In the app: i imports, Enter reads, ? lists shortcuts, and Ctrl+C saves and quits.
 Original book files stay in place. Node.js 22+ is required.
@@ -31,10 +31,10 @@ export async function main() {
     'no-alt-screen': {type: 'boolean'}, help: {type: 'boolean', short: 'h'}, version: {type: 'boolean', short: 'v'},
   }});
   if (values.help) {process.stdout.write(help); return;}
-  if (values.version) {process.stdout.write('jbook 0.1.0\n'); return;}
+  if (values.version) {process.stdout.write('joobook 0.1.0\n'); return;}
   if (values.theme && !['system', 'dark', 'light'].includes(values.theme)) throw new Error('--theme must be system, dark, or light.');
   if (values.list && positionals.length) throw new Error('--list cannot be combined with files to import.');
-  if (!values.list && (!process.stdin.isTTY || !process.stdout.isTTY)) throw new Error('jbook needs an interactive terminal. Use --list to inspect your library or --help for usage.');
+  if (!values.list && (!process.stdin.isTTY || !process.stdout.isTTY)) throw new Error('joobook needs an interactive terminal. Use --list to inspect your library or --help for usage.');
   const store = new LibraryStore(values.home, {readonly: values.list});
   if (values.list) {process.stdout.write(JSON.stringify(store.data.books, null, 2) + '\n'); return;}
   let restored = false, instance: ReturnType<typeof render> | undefined;
@@ -53,4 +53,4 @@ export async function main() {
     instance?.unmount(); restore(); store.close(); process.off('exit', onExit); process.off('SIGTERM', terminate); process.off('SIGHUP', terminate);
   }
 }
-main().catch(error => {process.stderr.write(`jbook: ${clean((error as Error).message)}\n`); process.exitCode = 1;});
+main().catch(error => {process.stderr.write(`joobook: ${clean((error as Error).message)}\n`); process.exitCode = 1;});

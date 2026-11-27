@@ -17,7 +17,7 @@ export function epub(options: {epub2?: boolean; broken?: boolean} = {}): Uint8Ar
   }).map(([name, value]) => [name, strToU8(value)])));
 }
 export async function fixture() {
-  const directory = await mkdtemp(join(tmpdir(), 'jbook-test-'));
+  const directory = await mkdtemp(join(tmpdir(), 'joobook-test-'));
   const path = join(directory, 'reader.epub'); await writeFile(path, epub());
   const textPath = join(directory, 'notes.txt'); await writeFile(textPath, 'Chapter 1\nA quiet room.\n\nChapter 2\nA garden.');
   const store = new LibraryStore(join(directory, 'state'));
